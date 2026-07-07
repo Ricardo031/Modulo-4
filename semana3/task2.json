@@ -1,0 +1,217 @@
+db.usuarios.insertMany([
+    {
+        "_id": ObjectId("65f1a2b3c4d5e6f7a8b90123"),
+        "nombre": "Carlos Mendoza",
+        "email": "carlos.mendoza@email.com",
+        "fecha_registro": new Date("2024-01-15T14:30:00Z"),
+        "activo": true,
+        "suscripcion": {
+            "tipo": "Premium",
+            "estado": "Activa",
+            "fin_periodo": new Date("2026-08-15T00:00:00Z")
+        },
+        "preferencias": {
+            "idioma": "Español",
+            "generos_favoritos": [
+                "Ciencia Ficción",
+                "Drama"
+            ]
+        }
+    },
+    {
+        "_id": ObjectId("65f1a2b3c4d5e6f7a8b90128"),
+        "nombre": "Diana Prince",
+        "email": "diana.p@email.com",
+        "fecha_registro": new Date("2025-03-20T09:15:00Z"),
+        "activo": true,
+        "suscripcion": {
+            "tipo": "Estándar",
+            "estado": "Activa",
+            "fin_periodo": new Date("2026-12-31T00:00:00Z")
+        },
+        "preferencias": {
+            "idioma": "Inglés",
+            "generos_favoritos": [
+                "Acción",
+                "Suspenso"
+            ]
+        }
+    },
+    {
+        "_id": ObjectId("65f1a2b3c4d5e6f7a8b90129"),
+        "nombre": "Jorge Lucas",
+        "email": "jorge.l@email.com",
+        "fecha_registro": new Date("2023-11-05T18:00:00Z"),
+        "activo": false,
+        "suscripcion": {
+            "tipo": "Básico",
+            "estado": "Cancelada",
+            "fin_periodo": new Date("2025-05-05T00:00:00Z")
+        },
+        "preferencias": {
+            "idioma": "Español",
+            "generos_favoritos": [
+                "Documental",
+                "Drama"
+            ]
+        }
+    }
+]);
+
+//% Peliculas
+db.peliculas.insertMany([
+    {
+        "_id": ObjectId("65f1a2b3c4d5e6f7a8b90124"),
+        "titulo": "El Misterio del Tiempo",
+        "año": 2025,
+        "generos": [
+            "Ciencia Ficción",
+            "Misterio"
+        ],
+        "director": "Elena Rostova",
+        "elenco": [
+            "Sophia Loren Jr.",
+            "Marcus Vance"
+        ],
+        "duracion_minutos": 142,
+        "clasificacion": "PG-13",
+        "sinopsis": "Un científico descubre un pliegue temporal en su laboratorio.",
+        "idiomas_disponibles": [
+            "Español",
+            "Inglés"
+        ],
+        "fecha_estreno": new Date("2025-05-12T00:00:00Z")
+    },
+    {
+        "_id": ObjectId("65f1a2b3c4d5e6f7a8b90130"),
+        "titulo": "Furia en el Asfalto",
+        "año": 2023,
+        "generos": [
+            "Acción",
+            "Suspenso"
+        ],
+        "director": "John Drive",
+        "elenco": [
+            "Marcus Vance",
+            "Lee Chang"
+        ],
+        "duracion_minutos": 115,
+        "clasificacion": "R",
+        "sinopsis": "Una persecución de alta velocidad por el desierto de Nevada.",
+        "idiomas_disponibles": [
+            "Inglés"
+        ],
+        "fecha_estreno": new Date("2023-08-20T00:00:00Z")
+    }
+]);
+
+
+//% series
+db.series.insertOne({
+    "_id": ObjectId("65f1a2b3c4d5e6f7a8b90125"),
+    "titulo": "Crónicas Cifradas",
+    "año_inicio": 2024,
+    "año_fin": null,
+    "generos": [
+        "Drama",
+        "Suspenso"
+    ],
+    "clasificacion": "TV-MA",
+    "temporadas": [
+        {
+            "numero_temporada": 1,
+            "año": 2024,
+            "episodios": [
+                {
+                    "numero_episodio": 1,
+                    "titulo": "Origen",
+                    "duracion_minutos": 50
+                },
+                {
+                    "numero_episodio": 2,
+                    "titulo": "El Algoritmo",
+                    "duracion_minutos": 48
+                }
+            ]
+        },
+        {
+            "numero_temporada": 2,
+            "año": 2025,
+            "episodios": [
+                {
+                    "numero_episodio": 1,
+                    "titulo": "Reinicio",
+                    "duracion_minutos": 55
+                }
+            ]
+        }
+    ]
+});
+
+//% valoraciones
+db.valoraciones.insertMany([
+    {
+        "_id": ObjectId("65f1a2b3c4d5e6f7a8b90126"),
+        "id_usuario": ObjectId("65f1a2b3c4d5e6f7a8b90123"), // Carlos
+        "id_contenido": ObjectId("65f1a2b3c4d5e6f7a8b90124"), // Película: El Misterio del Tiempo
+        "tipo_contenido": "pelicula",
+        "puntuacion": 5,
+        "comentario": "Excelente trama y efectos visuales.",
+        "fecha_valoracion": new Date("2026-02-20T18:15:22Z")
+    },
+    {
+        "_id": ObjectId("65f1a2b3c4d5e6f7a8b90131"),
+        "id_usuario": ObjectId("65f1a2b3c4d5e6f7a8b90128"), // Diana
+        "id_contenido": ObjectId("65f1a2b3c4d5e6f7a8b90124"), // Película: El Misterio del Tiempo
+        "tipo_contenido": "pelicula",
+        "puntuacion": 4,
+        "comentario": "Buena pero un poco lenta al principio.",
+        "fecha_valoracion": new Date("2026-03-01T21:00:00Z")
+    },
+    {
+        "_id": ObjectId("65f1a2b3c4d5e6f7a8b90132"),
+        "id_usuario": ObjectId("65f1a2b3c4d5e6f7a8b90128"), // Diana
+        "id_contenido": ObjectId("65f1a2b3c4d5e6f7a8b90125"), // Serie: Crónicas Cifradas
+        "tipo_contenido": "serie",
+        "puntuacion": 3,
+        "comentario": "La primera temporada fue mejor.",
+        "fecha_valoracion": new Date("2026-04-12T11:30:00Z")
+    }
+]);
+
+//% listas
+db.listas.insertMany([
+    {
+        "_id": ObjectId("65f1a2b3c4d5e6f7a8b90127"),
+        "id_usuario": ObjectId("65f1a2b3c4d5e6f7a8b90123"),
+        "nombre_lista": "Maratón de Fin de Semana",
+        "publica": false,
+        "fecha_creacion": new Date("2026-03-01T10:00:00Z"),
+        "elementos": [
+            {
+                "id_contenido": ObjectId("65f1a2b3c4d5e6f7a8b90124"),
+                "tipo_contenido": "pelicula",
+                "fecha_agregado": new Date("2026-03-01T10:05:00Z")
+            },
+            {
+                "id_contenido": ObjectId("65f1a2b3c4d5e6f7a8b90125"),
+                "tipo_contenido": "serie",
+                "fecha_agregado": new Date("2026-03-02T15:20:00Z")
+            }
+        ]
+    },
+    {
+        "_id": ObjectId("65f1a2b3c4d5e6f7a8b90133"),
+        "id_usuario": ObjectId("65f1a2b3c4d5e6f7a8b90128"),
+        "nombre_lista": "Películas de Acción Top",
+        "publica": true,
+        "fecha_creacion": new Date("2026-05-10T12:00:00Z"),
+        "elementos": [
+            {
+                "id_contenido": ObjectId("65f1a2b3c4d5e6f7a8b90130"), // Furia en el Asfalto
+                "tipo_contenido": "pelicula",
+                "fecha_agregado": new Date("2026-05-10T12:01:00Z")
+            }
+        ]
+    }
+]);

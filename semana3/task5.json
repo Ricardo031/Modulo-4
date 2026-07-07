@@ -1,0 +1,53 @@
+//todoCreación de Índices (createIndex)
+//% Índice de Texto Único en Usuarios
+db.usuarios.createIndex(
+  {
+    "email": 1
+},
+{
+    "unique": true,
+    "name": "idx_usuarios_email_unico"
+}
+);
+
+//% Índice Compuesto en Películas (Catálogo y Filtrado)
+ db.peliculas.createIndex(
+  {
+    "año": -1,
+    "clasificacion": 1
+},
+{
+    "name": "idx_peliculas_año_clasificacion"
+}
+);
+
+//% Índice multillave en arreglos
+db.peliculas.createIndex(
+  {
+    "generos": 1
+},
+{
+    "name": "idx_peliculas_generos"
+}
+);
+
+//% Índice Compuesto en Valoraciones (Unico por Contenido y Usuario)
+db.valoraciones.createIndex(
+  {
+    "id_contenido": 1,
+    "id_usuario": 1
+},
+{
+    "unique": true,
+    "name": "idx_valoraciones_contenido_usuario"
+}
+);
+
+//todo 2. Verificación de Índices (getIndexes)
+db.peliculas.getIndexes();
+db.usuarios.getIndexes();
+db.valoraciones.getIndexes();
+db.listas.getIndexes();
+
+
+

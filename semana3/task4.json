@@ -1,0 +1,43 @@
+//todo 1. Modificaciones (updateOne y updateMany)
+//Modificar una valoración específica (updateOne)
+db.valoraciones.updateOne(
+  {
+    "_id": ObjectId("65f1a2b3c4d5e6f7a8b90132")
+},
+{
+    "$set": {
+        "puntuacion": 4.5,
+        "comentario": "¡Mejoró bastante en el capítulo final!",
+        "fecha_valoracion": new Date()
+    }
+}
+);
+
+//Modificación masiva de usuarios inactivos (updateMany)
+//Busca a todos los usuarios que tengan su cuenta dada de baja (activo: false) y actualiza el estado de su suscripción a "Expirada" de manera masiva.
+db.usuarios.updateMany(
+  {
+    "activo": false
+},
+{
+    "$set": {
+        "suscripcion.estado": "Expirada",
+        "suscripcion.fin_periodo": new Date()
+    }
+}
+);
+
+//todo 2. Eliminaciones (deleteOne y deleteMany)
+//Eliminar una lista de reproducción privada (deleteOne)
+db.listas.deleteOne({
+    "_id": ObjectId("65f1a2b3c4d5e6f7a8b90127"),
+    "publica": false
+});
+
+//Limpieza de valoraciones bajas o spam (deleteMany)
+db.valoraciones.deleteMany({
+    "puntuacion": {
+        "$lte": 1.5
+    }
+});
+

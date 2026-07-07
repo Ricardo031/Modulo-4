@@ -1,0 +1,58 @@
+
+db.peliculas.find({ //%1. Películas con duración mayor a 120 minutos ($gt)
+    "duracion_minutos": {
+        "$gt": 120
+    }
+})
+//%2. Contenidos aptos para menores de edad ($lt y $in)
+db.peliculas.find({
+    "$or": [
+        {
+            "año": {
+                "$lt": 2024
+            }
+        },
+        {
+            "clasificacion": {
+                "$in": [
+                    "G",
+                    "PG",
+                    "PG-13"
+                ]
+            }
+        }
+    ]
+});
+
+//%3. Usuarios con suscripción Premium activa ($and)
+db.usuarios.find({
+    "$and": [
+        {
+            "suscripcion.tipo": {
+                "$eq": "Premium"
+            }
+        },
+        {
+            "suscripcion.estado": {
+                "$eq": "Activa"
+            }
+        }
+    ]
+});
+
+//%4. Series con título que contenga "crónicas" ($regex)
+dbdb.series.find({
+    "titulo": {
+        "$regex": "crónicas",
+        "$options": "i"
+    }
+});
+
+//%5. Listas con un elemento con el ID "65f1a2b3c4d5e6f7a8b90124" ($eq)
+db.listas.find({
+    "elementos.id_contenido": {
+        "$eq": ObjectId("65f1a2b3c4d5e6f7a8b90124")
+    }
+});
+
+
